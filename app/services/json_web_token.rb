@@ -10,5 +10,9 @@ class JsonWebToken
       JWT.decode token, ENV['JWT_SECRET'], true, { algorithm: 'HS256' } rescue 'Invalid Access Token.'
     end
 
+    def json_to_s(decoded_token, col)
+      decoded_token.to_s[/\"#{col}"\=>?\"([a-zA-Z ]+)/].gsub(/\"#{col}"\=>?\"/, '')
+    end
+
   end
 end
