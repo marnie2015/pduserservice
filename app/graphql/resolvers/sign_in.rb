@@ -13,7 +13,15 @@ class Resolvers::SignIn < GraphQL::Function
     user = User.where(email_address: args[:email_address], password: encryptpass(args[:password])).first
 
     unless user.nil?
-      payload = { email_address: user.try(:email_address), password: user.try(:password) }
+      payload = {
+        id: user.try(:id),
+        email_address: user.try(:email_address),
+        password: user.try(:password),
+        user_status_id: user.try(:user_status_id),
+        role_id: user.try(:role_id),
+        user_type_id: user.try(:user_type_id),
+        mobile_number: user.try(:mobile_number)
+      }
       token = JsonWebToken.encode(payload)
     end
 
