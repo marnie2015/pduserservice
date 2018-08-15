@@ -1,5 +1,5 @@
 class Resolvers::SignIn < GraphQL::Function
-  argument :email_address, !types.String
+  argument :email, !types.String
   argument :password, !types.String
 
   type do
@@ -10,17 +10,22 @@ class Resolvers::SignIn < GraphQL::Function
 
   def call(_obj, args, _ctx)
     token = nil
-    user = User.where(email_address: args[:email_address], password: encryptpass(args[:password])).first
+    user = User.joins("left join agent_users on agent_users.user_id = users.id").where(email: args[:email]).first
 
-    unless user.nil?
+    if user && BCrypt::Password.new(user.try(:encrypted_password)) == args[:password]
       payload = {
         id: user.try(:id),
-        email_address: user.try(:email_address),
-        password: user.try(:password),
-        user_status_id: user.try(:user_status_id),
-        role_id: user.try(:role_id),
-        user_type_id: user.try(:user_type_id),
-        mobile_number: user.try(:mobile_number)
+        email: user.try(:email),
+        encrypted_password: user.try(:encrypted_password),
+        designation: user.try(:designation),
+        mobile_number: user.try(:mobile_number),
+        branch_name: user.agent_user.try(:branch_name),
+        agent_id: user.agent_user.try(:agent_id),
+        address: user.agent_user.try(:address),
+        region: user.agent_user.try(:region),
+        city: user.agent_user.try(:city),
+        office_hours_start: user.agent_user.try(:office_hours_start),
+        office_hours_end: user.agent_user.try(:office_hours_end),
       }
       token = JsonWebToken.encode(payload)
     end
@@ -28,10 +33,6 @@ class Resolvers::SignIn < GraphQL::Function
     OpenStruct.new({
       token: token
     })
-  end
-
-  def encryptpass(val)
-    Digest::MD5.hexdigest(val)
   end
 
 end

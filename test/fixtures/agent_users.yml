@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  branch_name: MyString
+  address: MyString
+  region: MyString
+  city: MyString
+  agent: one
+  user: one
+  office_hours_start: 2018-08-15 10:32:15
+  office_hours_end: 2018-08-15 10:32:15
+
+two:
+  branch_name: MyString
+  address: MyString
+  region: MyString
+  city: MyString
+  agent: two
+  user: two
+  office_hours_start: 2018-08-15 10:32:15
+  office_hours_end: 2018-08-15 10:32:15
