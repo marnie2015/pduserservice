@@ -8,18 +8,30 @@ class Resolvers::CreateAgentUser < GraphQL::Function
   argument :office_hours_start, types.String
   argument :office_hours_end, types.String
 
-  type Types::AgentUserType
+  type do
+    name 'CreateAgentUser'
+
+    field :message, types.String
+  end
 
   def call(_obj, args, _ctx)
-    AgentUser.create!(
-      agent_id: args[:agent_id],
-      user_id: args[:user_id],
-      branch_name: args[:branch_name],
-      address: args[:address],
-      region: args[:region],
-      city: args[:city],
-      office_hours_start: args[:office_hours_start],
-      office_hours_end: args[:office_hours_end]
-    )
+    message = _ctx[:current_user]
+    if message != 'Invalid Access Token.'
+      AgentUser.create!(
+        agent_id: args[:agent_id],
+        user_id: args[:user_id],
+        branch_name: args[:branch_name],
+        address: args[:address],
+        region: args[:region],
+        city: args[:city],
+        office_hours_start: args[:office_hours_start],
+        office_hours_end: args[:office_hours_end]
+      )
+      message = 'Agent User successfully added!'
+    end
+
+    OpenStruct.new({
+      message: message
+    })
   end
 end
