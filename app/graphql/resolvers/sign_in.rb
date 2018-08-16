@@ -12,7 +12,7 @@ class Resolvers::SignIn < GraphQL::Function
     token = nil
     user = User.find_by(email: args[:email]).try(:authenticate, args[:pass])
 
-    unless user.nil?
+    if user
       payload = {
         id: user.try(:id),
         email: user.try(:email),
