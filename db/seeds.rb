@@ -22,7 +22,7 @@ Role.create([
 
 Agent.create([
   { cde: '1234', fullname: 'MLHUILLIER' },
-  { cde: '12345', fullname: 'MLHUILLIER2' }
+  { cde: '12345', fullname: 'WODEL' }
 ])
 
 User.create([
