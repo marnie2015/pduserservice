@@ -1,6 +1,6 @@
 class Resolvers::ChangePassword < GraphQL::Function
-  argument :email_address, !types.String
-  argument :password, !types.String
+  argument :email, !types.String
+  argument :pass, !types.String
 
   type do
     name 'ChangePassword'
@@ -11,12 +11,12 @@ class Resolvers::ChangePassword < GraphQL::Function
   def call(_obj, args, _ctx)
     message = _ctx[:current_user]
     if message != 'Invalid Access Token.'
-      user = User.where(email_address: args[:email_address]).first
+      user = User.where(email: args[:email]).first
 
       if user.nil?
         message = 'Record not found!'
       else
-        user.update(password: encryptpass(args[:password]))
+        user.update(password: args[:pass])
         message = 'Password successfully changed!'
       end
     end
@@ -24,9 +24,5 @@ class Resolvers::ChangePassword < GraphQL::Function
     OpenStruct.new({
       message: message
     })
-  end
-
-  def encryptpass(val)
-    Digest::MD5.hexdigest(val)
   end
 end
