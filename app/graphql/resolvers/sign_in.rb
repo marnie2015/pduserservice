@@ -17,7 +17,8 @@ class Resolvers::SignIn < GraphQL::Function
         id: user.try(:id),
         email: user.try(:email),
         designation: user.try(:designation),
-        mobile_number: user.try(:mobile_number)
+        mobile_number: user.try(:mobile_number),
+        role: user.try(:role)
       }
       token = JsonWebToken.encode(payload)
     end

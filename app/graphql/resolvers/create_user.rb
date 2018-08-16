@@ -3,6 +3,7 @@ class Resolvers::CreateUser < GraphQL::Function
   argument :pass, !types.String
   argument :designation, !types.String
   argument :mobile_number, !types.String
+  argument :role, !types.String
 
   type do
     name 'CreateUser'
@@ -16,7 +17,8 @@ class Resolvers::CreateUser < GraphQL::Function
         email: args[:email],
         password: args[:pass],
         designation: args[:designation],
-        mobile_number: args[:mobile_number]
+        mobile_number: args[:mobile_number],
+        role: args[:role]
       )
       message = 'User successfully added!'
     end

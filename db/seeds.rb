@@ -7,13 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # require 'bcrypt'
 
-Access.create([
-  { access_type: 'View' },
-  { access_type: 'View / Edit' },
-  { access_type: 'View / Add' },
-  { access_type: 'View / Add / Edit' }
-])
-
 Role.create([
   { category: 'Maintenance', sub_category: 'User Account', url: '/users' },
   { category: 'Application', sub_category: 'CTPL', url: '/ctpl' },
@@ -26,8 +19,8 @@ Agent.create([
 ])
 
 User.create([
-  { email: 'mladmin@test.com', password: 'test123', designation: 'Agent Admin' },
-  { email: 'marnie.paraiso@paramount.com.ph', password: 'test1234', designation: 'Admin' }
+  { email: 'marnie.paraiso@paramount.com.ph', password: 'test1234', designation: 'Admin', mobile_number: '09776564672', role: '1,2,3' },
+  { email: 'mladmin@test.com', password: 'test123', designation: 'Agent Admin', mobile_number: '09217094393', role: '3' }
 ])
 
 AgentUser.create([

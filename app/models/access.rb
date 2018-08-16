@@ -1,2 +1,0 @@
-class Access < ApplicationRecord
-end
