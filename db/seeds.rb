@@ -26,8 +26,8 @@ Agent.create([
 ])
 
 User.create([
-  { email: 'mladmin@test.com', encrypted_password: BCrypt::Password.create('test123'), designation: 'Agent Admin' },
-  { email: 'marnie.paraiso@paramount.com.ph', encrypted_password: BCrypt::Password.create('test1234'), designation: 'Admin' }
+  { email: 'mladmin@test.com', password: 'test123', designation: 'Agent Admin' },
+  { email: 'marnie.paraiso@paramount.com.ph', password: 'test1234', designation: 'Admin' }
 ])
 
 AgentUser.create([
