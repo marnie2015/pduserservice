@@ -13,11 +13,9 @@ class Resolvers::ChangePassword < GraphQL::Function
   def call(_obj, args, _ctx)
     @message = _ctx[:current_user]
     if @message != 'Invalid Access Token.'
-      if _ctx[:current_user]["designation"].downcase == 'admin'
-        admin_access(args[:email], args[:new_pass], args[:confirm_pass])
-      else
+      _ctx[:current_user]['designation'].downcase == 'admin' ?
+        admin_access(args[:email], args[:new_pass], args[:confirm_pass]) :
         user_access(args[:email], args[:old_pass], args[:new_pass], args[:confirm_pass])
-      end
     end
 
     OpenStruct.new({
@@ -49,6 +47,3 @@ class Resolvers::ChangePassword < GraphQL::Function
     end
   end
 end
-
-
-# "query" : "mutation {changePassword(email: \"mladmin@test.com\" old_pass: \"newpass\" new_pass: \"newpass1\" confirm_pass: \"newpass1\") {message}}"
