@@ -65,3 +65,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'graphql', '1.7.4'
 
 gem 'jwt'
+
+gem 'roo', '~> 1.13.2'

@@ -9,12 +9,16 @@ class Resolvers::MyProfile < GraphQL::Function
   end
 
   def call(_obj, args, _ctx)
-    usr = _ctx[:current_user]
-    if usr != 'Invalid Access Token.'
-      user = User.where(id: usr.try(:id)).first
-      roles = Role.where(id: usr.role.split(','))
-      agentuser = AgentUser.where(user_id: usr.id).first
+    user = _ctx[:current_user]
+    if user != 'Invalid Access Token.'
+      roles = Role.where(id: user.role.split(','))
+      agentuser = AgentUser.where(user_id: user.id).first
       agent = Agent.where(id: agentuser.try(:id)).first
+    else
+      user = User.new
+      roles = Role.new
+      agentuser = AgentUser.new
+      agent = Agent.new
     end
 
     OpenStruct.new({

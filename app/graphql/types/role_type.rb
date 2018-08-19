@@ -1,5 +1,5 @@
 Types::RoleType = GraphQL::ObjectType.define do
-  name 'RoleType'
+  name 'Role'
 
   field :id, types.ID
   field :category, !types.String
