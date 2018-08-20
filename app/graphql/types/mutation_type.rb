@@ -9,4 +9,5 @@ Types::MutationType = GraphQL::ObjectType.define do
   field :createAgentUser, function: Resolvers::CreateAgentUser.new
   field :forgotPassword, function: Resolvers::ForgotPassword.new
   field :resetPassword, function: Resolvers::ResetPassword.new
+  field :updateUserRole, function: Resolvers::UpdateUserRole.new
 end
