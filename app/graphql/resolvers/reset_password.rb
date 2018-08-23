@@ -12,7 +12,7 @@ class Resolvers::ResetPassword < GraphQL::Function
   def call(_obj, args, _ctx)
     user = User.find_by(reset_password_token: args[:reset_password_token])
     if user
-      message = user.update(password: args[:new_pass], password_confirmation: args[:confirm_pass]) == true ?
+      message = user.update(password: args[:new_pass], password_confirmation: args[:confirm_pass], reset_password_token: nil) == true ?
         'Password reset successful!' : 'Invalid confirmation password!'
     else
       message = 'Invalid Token.'
