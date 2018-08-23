@@ -37,7 +37,7 @@ task migrate_users: :environment do
                 password: temppass,
                 designation: DESIGNATION[s.cell(i, 2).to_i],
                 id: s.cell(i, 3).to_i,
-                role: '22'
+                role: '21'
                 }
     end
   end
