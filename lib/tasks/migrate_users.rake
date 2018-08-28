@@ -43,5 +43,6 @@ task migrate_users: :environment do
   end
 
   User.create!(users)
+  User.find(9).update(role: '1,2,3,21,45,46,47,48,49,50,60,61,62')
   puts 'Done migrating.'
 end

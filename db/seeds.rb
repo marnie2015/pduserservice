@@ -67,8 +67,9 @@ Role.create([
   { category: 'References', sub_category: 'Roadside', url: '/admin/roadside' },
   { category: 'References', sub_category: 'Vehicle Basic Premium', url: '/admin/vehicle_basic_premia' },
   { category: 'Reports', sub_category: 'Summary Collection', url: '#' },
-  { category: 'Maintenance', sub_category: '', url: '/admin/users//edit'},
-  { category: '', sub_category: '', url: '/admin/change-my-password'}
+  { category: 'Maintenance', sub_category: 'Edit User', url: '/admin/users//edit'},
+  { category: 'Account', sub_category: 'Change My Password', url: '/admin/change-my-password'},
+  { category: 'Maintenance', sub_category: 'Edit Role', url: '/admin/edit_user_role/'}
 ])
 
 Agent.create([

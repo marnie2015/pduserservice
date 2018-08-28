@@ -20,6 +20,14 @@ Types::QueryType = GraphQL::ObjectType.define do
     }
   end
 
+  connection :usersConnection, Types::UserType.connection_type do
+    resolve ->(_obj, args, ctx) {
+      if ctx[:current_user] != 'Invalid Access Token.'
+        User.all
+      end
+    }
+  end
+
   field :users, types[Types::UserType] do
     resolve ->(_obj, args, ctx) {
       if ctx[:current_user] != 'Invalid Access Token.'
