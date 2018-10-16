@@ -8,8 +8,8 @@ class Resolvers::CreateRole < GraphQL::Function
     field :message, types.String
   end
 
-  def call(_obj, args, _ctx)
-    message = _ctx[:current_user]
+  def call(_obj, args, ctx)
+    message = ctx[:current_user]
     if message != 'Invalid Access Token.'
       Role.create!(
         category: args[:category],

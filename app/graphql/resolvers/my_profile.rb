@@ -8,8 +8,8 @@ class Resolvers::MyProfile < GraphQL::Function
     field :agentuser, Types::AgentUserType
   end
 
-  def call(_obj, args, _ctx)
-    user = _ctx[:current_user]
+  def call(_obj, args, ctx)
+    user = ctx[:current_user]
     if user != 'Invalid Access Token.'
       roles = Role.where(id: user.role.split(','))
       agentuser = AgentUser.where(user_id: user.id).first

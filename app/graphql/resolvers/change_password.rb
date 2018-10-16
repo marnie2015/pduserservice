@@ -10,10 +10,10 @@ class Resolvers::ChangePassword < GraphQL::Function
     field :message, types.String
   end
 
-  def call(_obj, args, _ctx)
-    @message = _ctx[:current_user]
+  def call(_obj, args, ctx)
+    @message = ctx[:current_user]
     if @message != 'Invalid Access Token.'
-      _ctx[:current_user]['designation'].downcase == 'dm admin' ?
+      ctx[:current_user]['designation'].downcase == 'dm admin' ?
         admin_access(args[:email], args[:new_pass], args[:confirm_pass]) :
         user_access(args[:email], args[:old_pass], args[:new_pass], args[:confirm_pass])
     end

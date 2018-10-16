@@ -7,8 +7,8 @@ class Resolvers::UpdateUserRole < GraphQL::Function
     field :message, types.String
   end
 
-  def call(_obj, args, _ctx)
-    message = _ctx[:current_user]
+  def call(_obj, args, ctx)
+    message = ctx[:current_user]
     if message != 'Invalid Access Token.'
       User.find(args[:user_id]).update(role: args[:role])
       message = 'User role successfully updated!'
