@@ -7,7 +7,7 @@ class JsonWebToken
     end
 
     def decode(token)
-      JWT.decode token, ENV['JWT_SECRET'], true, { algorithm: 'HS256' } rescue 'Invalid Access Token.'
+      JWT.decode token, ENV['JWT_SECRET'], true, { algorithm: 'HS256' } rescue nil
     end
 
     def json_to_s(decoded_token, col)
